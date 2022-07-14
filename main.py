@@ -36,7 +36,7 @@ x = 1000
 df = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), rawdata_conversion(x, 18, 4),
 rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
 index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
-for x in range(1001, 1006, 1):
+for x in range(1001, 1100, 1):
     #add new packages and concat them to the initial package DataFrame
     new_row = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), 
     rawdata_conversion(x, 18, 4), rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
@@ -45,4 +45,4 @@ for x in range(1001, 1006, 1):
 
 df.to_csv('pmuData.csv') 
 #df.to_excel('pmuData.xlsx' , sheet_name="new_sheet_name" )
-print(df)
+#print(df)
