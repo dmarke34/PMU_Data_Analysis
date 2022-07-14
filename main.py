@@ -8,7 +8,7 @@ import pandas as pd
 #read pcap file from Wireshark
 p = rdpcap('C:/Users/gabea/Documents/testCapture.pcap') 
 
-#address for pmu as
+#address for pmu as source
 hx = '0x52'
 
 #convert rawdata from Wireshark to PMU measurement data
@@ -33,13 +33,15 @@ def rawdata_conversion(pck, byte, offset):
 
 #initial package
 x = 2022
-df = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), rawdata_conversion(x, 18, 4)]],
-index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle'])
+df = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), rawdata_conversion(x, 18, 4),
+rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
+index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
 for x in range(1089, 1092, 1):
 
     #add new packages and concat them to the initial package DataFrame
-    new_row = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), rawdata_conversion(x, 18, 4)]],
-    index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle'])
+    new_row = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), 
+    rawdata_conversion(x, 18, 4), rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
+    index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
     df = pd.concat([df, new_row])
 
 #df.to_csv('pmuData.csv') 
