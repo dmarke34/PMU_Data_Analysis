@@ -4,5 +4,4 @@
 
 1. Change PMU from Rectangular to Polar
 2. Limit amount of packets to around 5000
-3. Round of measurement values
-4. Graph and Plot Measurements
+3. Graph and Plot Measurements
