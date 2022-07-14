@@ -26,7 +26,7 @@ def rawdata_conversion(pck, byte, offset):
         fourth_final = str(fourth_digit[2:].zfill(2))
 
         result = first_final + second_final + third_final + fourth_final 
-        return struct.unpack('!f', bytes.fromhex(result))[0]
+        return round(struct.unpack('!f', bytes.fromhex(result))[0], 2)
     else:
         return
 
@@ -36,8 +36,7 @@ x = 1000
 df = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), rawdata_conversion(x, 18, 4),
 rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
 index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
-for x in range(1001, 1100, 1):
-
+for x in range(1001, 1006, 1):
     #add new packages and concat them to the initial package DataFrame
     new_row = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), 
     rawdata_conversion(x, 18, 4), rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
