@@ -8,7 +8,7 @@ import pandas as pd
 #read pcap file from Wireshark
 p = rdpcap('C:/Users/gabea/Documents/testCapture.pcap') 
 
-#address for pmu as source
+#address for pmu as source ip address
 hx = '0x52'
 
 #convert rawdata from Wireshark to PMU measurement data
