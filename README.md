@@ -2,6 +2,5 @@
 
 ## TODO
 
-1. Change PMU from Rectangular to Polar
-2. Limit amount of packets to around 5000
-3. Graph and Plot Measurements
+1. Limit amount of packets to around 5000
+2. Find a way to remove all packets with no data and update csv file
