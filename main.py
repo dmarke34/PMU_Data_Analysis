@@ -31,6 +31,7 @@ def rawdata_conversion(pck, byte, offset):
     else:
         return
 
+#rect to polar (magnitude)
 def rect2polroh(x, y):
     if int(x or 0) | int(y or 0) != 0.0:
         rho = np.sqrt(x**2.0 + y**2.0)
@@ -38,6 +39,7 @@ def rect2polroh(x, y):
     else:
         return
 
+#rect to polar (angle)
 def rect2polphi(x,y):
     if int(x or 0) | int(y or 0) != 0.0:
         phi = np.arctan2(y,x)
