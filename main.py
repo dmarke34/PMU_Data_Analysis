@@ -4,6 +4,7 @@ import sys
 from scapy.all import *
 import struct
 import pandas as pd
+import numpy as np
 
 #read pcap file from Wireshark
 p = rdpcap('C:/Users/gabea/Documents/testCapture.pcap') 
@@ -30,6 +31,21 @@ def rawdata_conversion(pck, byte, offset):
     else:
         return
 
+def rect2polroh(x, y):
+    if int(x or 0) | int(y or 0) != 0.0:
+        rho = np.sqrt(x**2.0 + y**2.0)
+        return (round(rho, 2))
+    else:
+        return
+
+def rect2polphi(x,y):
+    if int(x or 0) | int(y or 0) != 0.0:
+        phi = np.arctan2(y,x)
+        return round(math.degrees(phi), 2)
+    else:
+        return
+
+#print(rect2pol(rawdata_conversion(1000, 6, 4), rawdata_conversion(1000, 10, 4)))    
 
 #initial package
 x = 1000
@@ -38,11 +54,18 @@ rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
 index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
 for x in range(1001, 1100, 1):
     #add new packages and concat them to the initial package DataFrame
-    new_row = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), 
-    rawdata_conversion(x, 18, 4), rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
+    a = rawdata_conversion(x, 6, 4)
+    b = rawdata_conversion(x, 10, 4)
+    c = rawdata_conversion(x, 14, 4)
+    d = rawdata_conversion(x, 18, 4)
+
+    new_row = pd.DataFrame([[x,rect2polroh(a, b), rect2polphi(a, b), rect2polroh(c, d), 
+    rect2polphi(c, d), rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
     index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
     df = pd.concat([df, new_row])
 
+df = df.iloc[1:]
 df.to_csv('pmuData.csv') 
 #df.to_excel('pmuData.xlsx' , sheet_name="new_sheet_name" )
-#print(df)
+
+print(df)
