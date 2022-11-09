@@ -3,7 +3,7 @@ import csv
 
 
 def create_db():
-    con = s1.connect('test.db')
+    con = sl.connect('test.db')
     cur = con.cursor()
 
     cur.execute('CREATE TABLE filteredData(packet, VoltageMag, VoltageAngle, CurrentMag, CurrentAngle, ActualFreq, ROCOF')
@@ -12,7 +12,7 @@ def create_db():
     print(res.fetchone())
 
 def add_data_to_db(data: list):
-    con = s1.connect('test.db')
+    con = sl.connect('test.db')
     cur = con.cursor()
 
     cur.executemany('INSERT INTO filteredData VALUES(?, ?, ?, ?, ?, ?, ?)', data)
