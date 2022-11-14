@@ -6,7 +6,7 @@ def create_db():
     con = sl.connect('test.db')
     cur = con.cursor()
 
-    cur.execute('CREATE TABLE filteredData(packet, VoltageMag, VoltageAngle, CurrentMag, CurrentAngle, ActualFreq, ROCOF')
+    cur.execute('CREATE TABLE filteredData(packet, VoltageMag, VoltageAngle, CurrentMag, CurrentAngle, ActualFreq, ROCOF)')
 
     res = cur.execute('SELECT name FROM sqlite_master')
     print(res.fetchone())
@@ -38,9 +38,9 @@ def print_data_in_db():
         print(row)
 
 def main():
-    # create_db()
-    # data = csv_to_sqlite(csv_file_path='filteredData.csv')
-    #add_data_to_db(data)
+    create_db()
+    data = csv_to_sqlite(csv_file_path='filteredData.csv')
+    add_data_to_db(data)
     print_data_in_db()
 
 if __name__ == '__main__':
