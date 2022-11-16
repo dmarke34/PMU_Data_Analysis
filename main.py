@@ -51,11 +51,11 @@ def main_function(p):
     #print(rect2pol(rawdata_conversion(1000, 6, 4), rawdata_conversion(1000, 10, 4)))    
 
     #initial package
-    x = 0
+    x = 184
     df = pd.DataFrame([[x,rawdata_conversion(x, 6, 4), rawdata_conversion(x, 10, 4), rawdata_conversion(x, 14, 4), rawdata_conversion(x, 18, 4),
     rawdata_conversion(x, 6, 5) ,rawdata_conversion(x, 10, 5)]],
     index =[x], columns=['Packet','Voltage Mag', 'Voltage Angle', 'Current Mag', 'Current Angle', 'Actual Frequency', 'ROCOF'])
-    for x in range(1, 150, 1):
+    for x in range(185, 725, 1):
         #add new packages and concat them to the initial package DataFrame
         a = rawdata_conversion(x, 6, 4)
         b = rawdata_conversion(x, 10, 4)
