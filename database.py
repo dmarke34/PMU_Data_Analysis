@@ -3,7 +3,7 @@ import csv
 
 
 def create_db():
-    con = sl.connect('test.db')
+    con = sl.connect('test2.db')
     cur = con.cursor()
 
     cur.execute('CREATE TABLE filteredData(packet, VoltageMag, VoltageAngle, CurrentMag, CurrentAngle, ActualFreq, ROCOF)')
@@ -12,7 +12,7 @@ def create_db():
     print(res.fetchone())
 
 def add_data_to_db(data: list):
-    con = sl.connect('test.db')
+    con = sl.connect('test2.db')
     cur = con.cursor()
 
     cur.executemany('INSERT INTO filteredData VALUES(?, ?, ?, ?, ?, ?, ?)', data)
@@ -31,7 +31,7 @@ def csv_to_sqlite(csv_file_path: str):
     return data
 
 def print_data_in_db():
-    con = sl.connect('test.db')
+    con = sl.connect('test2.db')
     cur = con.cursor()
 
     for row in cur.execute("SELECT * FROM filteredData"):
